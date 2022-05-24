@@ -2,29 +2,37 @@ import 'package:firstday/provider/loginProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class loginScreen extends StatelessWidget {
+class loginScreen extends StatefulWidget {
+  @override
+  State<loginScreen> createState() => _loginScreenState();
+}
+
+class _loginScreenState extends State<loginScreen> {
   final nameController = TextEditingController();
+
   final mailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final contactController = TextEditingController();
+
   final _form = GlobalKey<FormState>();
+
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(body: 
-      Consumer(builder: (context, ref, child) {
+      child: Scaffold(body: Consumer(builder: (context, ref, child) {
         final isLogin = ref.watch(loginProvider);
 
-        return
-         Form(
+        return Form(
             key: _form,
             child: SingleChildScrollView(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Container(
-                  
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,12 +47,15 @@ class loginScreen extends StatelessWidget {
                       ),
                       Center(
                         child: Text(
-                          'Welcome to LemonPie! \n ',
+                          'Welcome to LemonPie! ',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 9,
                       ),
                       Center(
                         child: Text(
@@ -59,15 +70,6 @@ class loginScreen extends StatelessWidget {
                         TextFormField(
                           controller: nameController,
                           textCapitalization: TextCapitalization.words,
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'username is required';
-                            }
-                            if (val.length > 30) {
-                              return 'maximum user length is 30';
-                            }
-                            return null;
-                          },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
@@ -79,15 +81,6 @@ class loginScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return 'email is required';
-                          }
-                          if (!val.contains('@')) {
-                            return 'please provide valid email address';
-                          }
-                          return null;
-                        },
                         controller: mailController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -99,21 +92,22 @@ class loginScreen extends StatelessWidget {
                         height: 20,
                       ),
                       TextFormField(
+                        obscureText: _isObscure,
                         controller: passwordController,
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return 'password is required';
-                          }
-                          if (val.length > 20) {
-                            return 'maximum password length is 20';
-                          }
-                          return null;
-                        },
-                        obscureText: true,
+                        //obscureText: true,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
+                            suffixIcon: IconButton(
+                                icon: Icon(_isObscure
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                  });
+                                }),
                             hintText: 'Password'),
                       ),
                       SizedBox(
@@ -123,15 +117,6 @@ class loginScreen extends StatelessWidget {
                         TextFormField(
                           controller: contactController,
                           textCapitalization: TextCapitalization.words,
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return 'contact is required';
-                            }
-                            if (val.length > 10) {
-                              return 'Number must be 10';
-                            }
-                            return null;
-                          },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),

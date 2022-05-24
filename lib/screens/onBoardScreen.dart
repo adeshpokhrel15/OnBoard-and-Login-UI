@@ -29,7 +29,7 @@ class _onboardingState extends State<onboarding> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image.asset(
             image,
-            height: 190,
+            height: 450,
             fit: BoxFit.cover,
             width: double.infinity,
           ),
@@ -71,25 +71,25 @@ class _onboardingState extends State<onboarding> {
                   title: 'Connect with People',
                   description:
                       'Immerse yourself in other cultures and new ways of life. Don\t limit yourself to just travel,but instead live the experience just like a local',
-                  image: 'assets/hil.jpg'),
+                  image: 'assets/hero-1.png'),
               buildPage(
                   color: Colors.white,
                   title: 'Discover and enjoy',
                   description:
                       'Discover new places, routes, monuments, movie panaromas and charmming hideaways through the app',
-                  image: 'assets/baloon.jpg'),
+                  image: 'assets/hero-2.png'),
               buildPage(
                   color: Colors.white,
                   title: 'Share your experience',
                   description:
                       'The app allows you to share your routes, upload photos and leave comments. Interact with other users and be a part of the travelling community',
-                  image: 'assets/mountain.jpg'),
+                  image: 'assets/hero-3.png'),
               buildPage(
                   color: Colors.white,
                   title: 'Shave your favourites',
                   description:
                       'Save the routes and places you like the most and make planning your trip both easy and fun',
-                  image: 'assets/road.jpg'),
+                  image: 'assets/hero-1.png'),
             ],
           ),
         ),
