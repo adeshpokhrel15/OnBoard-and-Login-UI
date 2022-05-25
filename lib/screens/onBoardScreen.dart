@@ -1,4 +1,3 @@
-import 'package:firstday/screens/animatedIndicator.dart';
 import 'package:firstday/screens/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -194,41 +193,6 @@ class _onboardingState extends State<onboarding> {
                     ),
                   )
                 ]),
-
-                // height: 80,
-                // color: Colors.pinkAccent,
-                // child: Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                // TextButton(
-                //   child:
-                //       Text('Skip', style: TextStyle(color: Colors.white)),
-                //   onPressed: () => controller.jumpToPage(3),
-                // ),
-                // Center(
-                //   child: SmoothPageIndicator(
-                //     controller: controller,
-                //     count: 4,
-                //     effect: WormEffect(
-                //       spacing: 12,
-                //       dotColor: Colors.orange,
-                //       activeDotColor: Colors.teal.shade100,
-                //     ),
-                //         onDotClicked: (index) => controller.animateToPage(index,
-                //             duration: const Duration(milliseconds: 300),
-                //             curve: Curves.ease),
-                //       ),
-                //     ),
-                //     TextButton(
-                //       child:
-                //           Text('Next', style: TextStyle(color: Colors.white)),
-                // onPressed: () => controller.nextPage(
-                //   duration: Duration(milliseconds: 300),
-                //   curve: Curves.easeIn,
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ),
       ),
     );

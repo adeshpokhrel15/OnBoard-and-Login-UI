@@ -1,7 +1,4 @@
-import 'package:firstday/screens/loginScreen.dart';
 import 'package:firstday/screens/onBoardScreen.dart';
-import 'package:firstday/screens/onBoarding.dart';
-import 'package:firstday/screens/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_navigation/get_navigation.dart';
