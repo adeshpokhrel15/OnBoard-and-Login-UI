@@ -14,16 +14,11 @@ class _onboardingState extends State<onboarding> {
   late double _onBoardValue = 0.25;
   @override
   void initState() {
-    // TODO: implement initState
     _onBoardValue = 0.25;
     super.initState();
   }
 
   _progressBoard(int position) {
-    // setState(() {
-    //   _onBoardValue = 0.25 * position;
-    // });
-
     _onBoardValue = 0.25 * position;
   }
 
@@ -113,45 +108,16 @@ class _onboardingState extends State<onboarding> {
           ),
         ),
         bottomSheet: isLastPage
-            ? TextButton(
-                style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    primary: Colors.white,
-                    backgroundColor: Colors.orange,
-                    minimumSize: const Size.fromHeight(80)),
-                onPressed: () {
-                  Get.to(() => loginScreen());
-                },
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            : Container(
+            ? Container(
                 height: 130, //
                 width: 380, //
                 child: Stack(children: [
-                  Positioned(
-                    left: 280,
-                    bottom: 15,
-                    child: TextButton(
-                      child: Text('Skip',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () => controller.jumpToPage(3),
-                    ),
-                  ),
                   Center(
                     child: Container(
                       height: 83, //
                       width: 83,
                       child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation(Colors.orange),
+                        valueColor: AlwaysStoppedAnimation(Color(0xFF41b883)),
                         value: _onBoardValue,
                       ),
                     ),
@@ -168,7 +134,64 @@ class _onboardingState extends State<onboarding> {
                         height: 70,
                         width: 70,
                         decoration: BoxDecoration(
-                            color: Colors.red,
+                            color: Color(0xFF41b883),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50),
+                            )),
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(() => loginScreen());
+                          },
+                          child: Icon(
+                            Icons.done,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 140,
+                    child: SmoothPageIndicator(
+                      controller: controller,
+                      count: 4,
+                      effect: WormEffect(
+                        spacing: 12,
+                        dotColor: Color(0xFF41b883),
+                        activeDotColor: Colors.teal.shade100,
+                      ),
+                    ),
+                  )
+                ]),
+              )
+            : Container(
+                height: 130, //
+                width: 380, //
+                child: Stack(children: [
+                  Center(
+                    child: Container(
+                      height: 83, //
+                      width: 83,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Color(0xFF41b883)),
+                        value: _onBoardValue,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      },
+                      child: Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                            color: Color(0xFF41b883),
                             borderRadius: BorderRadius.all(
                               Radius.circular(50),
                             )),
@@ -187,7 +210,7 @@ class _onboardingState extends State<onboarding> {
                       count: 4,
                       effect: WormEffect(
                         spacing: 12,
-                        dotColor: Colors.red,
+                        dotColor: Color(0xFF41b883),
                         activeDotColor: Colors.teal.shade100,
                       ),
                     ),
