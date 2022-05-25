@@ -5,21 +5,6 @@ import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onboarding extends StatefulWidget {
-  // const onboarding(
-  //     {Key? key,
-  //     required this.page,
-  //     required List list,
-  //     required PageController controller,
-  //     required this.showAnimatedContainerCallBack})
-  //     : _list = list,
-  //       _controller = controller,
-  //       super(key: key);
-
-  // final int page;
-  // final List _list;
-  // final PageController _controller;
-  // final Function showAnimatedContainerCallBack;
-
   @override
   State<onboarding> createState() => _onboardingState();
 }
@@ -27,6 +12,22 @@ class onboarding extends StatefulWidget {
 class _onboardingState extends State<onboarding> {
   final controller = PageController();
   bool isLastPage = false;
+  late double _onBoardValue = 0.25;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _onBoardValue = 0.25;
+    super.initState();
+  }
+
+  _progressBoard(int position) {
+    // setState(() {
+    //   _onBoardValue = 0.25 * position;
+    // });
+
+    _onBoardValue = 0.25 * position;
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -79,7 +80,10 @@ class _onboardingState extends State<onboarding> {
           child: PageView(
             controller: controller,
             onPageChanged: (index) {
-              setState(() => isLastPage = index == 3);
+              setState(() {
+                isLastPage = index == 3;
+                _progressBoard(index + 1);
+              });
             },
             children: [
               buildPage(
@@ -130,19 +134,37 @@ class _onboardingState extends State<onboarding> {
                 height: 130, //
                 width: 380, //
                 child: Stack(children: [
+                  Positioned(
+                    left: 280,
+                    bottom: 15,
+                    child: TextButton(
+                      child: Text('Skip',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      onPressed: () => controller.jumpToPage(3),
+                    ),
+                  ),
                   Center(
                     child: Container(
                       height: 83, //
                       width: 83,
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation(Colors.orange),
-                        value: 0.25,
+                        value: _onBoardValue,
                       ),
                     ),
                   ),
                   Center(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      },
                       child: Container(
                         height: 70,
                         width: 70,
@@ -159,9 +181,20 @@ class _onboardingState extends State<onboarding> {
                       ),
                     ),
                   ),
+                  Positioned(
+                    left: 140,
+                    child: SmoothPageIndicator(
+                      controller: controller,
+                      count: 4,
+                      effect: WormEffect(
+                        spacing: 12,
+                        dotColor: Colors.red,
+                        activeDotColor: Colors.teal.shade100,
+                      ),
+                    ),
+                  )
                 ]),
 
-                /////yaha bata
                 // height: 80,
                 // color: Colors.pinkAccent,
                 // child: Row(
@@ -172,15 +205,15 @@ class _onboardingState extends State<onboarding> {
                 //       Text('Skip', style: TextStyle(color: Colors.white)),
                 //   onPressed: () => controller.jumpToPage(3),
                 // ),
-                //     Center(
-                //       child: SmoothPageIndicator(
-                //         controller: controller,
-                //         count: 4,
-                //         effect: WormEffect(
-                //           spacing: 12,
-                //           dotColor: Colors.orange,
-                //           activeDotColor: Colors.teal.shade100,
-                //         ),
+                // Center(
+                //   child: SmoothPageIndicator(
+                //     controller: controller,
+                //     count: 4,
+                //     effect: WormEffect(
+                //       spacing: 12,
+                //       dotColor: Colors.orange,
+                //       activeDotColor: Colors.teal.shade100,
+                //     ),
                 //         onDotClicked: (index) => controller.animateToPage(index,
                 //             duration: const Duration(milliseconds: 300),
                 //             curve: Curves.ease),
@@ -189,9 +222,9 @@ class _onboardingState extends State<onboarding> {
                 //     TextButton(
                 //       child:
                 //           Text('Next', style: TextStyle(color: Colors.white)),
-                //       onPressed: () => controller.nextPage(
-                //         duration: Duration(milliseconds: 300),
-                //         curve: Curves.easeIn,
+                // onPressed: () => controller.nextPage(
+                //   duration: Duration(milliseconds: 300),
+                //   curve: Curves.easeIn,
                 //       ),
                 //     ),
                 //   ],
