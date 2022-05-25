@@ -1,9 +1,25 @@
+import 'package:firstday/screens/animatedIndicator.dart';
 import 'package:firstday/screens/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onboarding extends StatefulWidget {
+  // const onboarding(
+  //     {Key? key,
+  //     required this.page,
+  //     required List list,
+  //     required PageController controller,
+  //     required this.showAnimatedContainerCallBack})
+  //     : _list = list,
+  //       _controller = controller,
+  //       super(key: key);
+
+  // final int page;
+  // final List _list;
+  // final PageController _controller;
+  // final Function showAnimatedContainerCallBack;
+
   @override
   State<onboarding> createState() => _onboardingState();
 }
@@ -111,40 +127,75 @@ class _onboardingState extends State<onboarding> {
                 ),
               )
             : Container(
-                height: 80,
-                color: Colors.pinkAccent,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      child:
-                          Text('Skip', style: TextStyle(color: Colors.white)),
-                      onPressed: () => controller.jumpToPage(3),
+                height: 130, //
+                width: 380, //
+                child: Stack(children: [
+                  Center(
+                    child: Container(
+                      height: 83, //
+                      width: 83,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Colors.orange),
+                        value: 0.25,
+                      ),
                     ),
-                    Center(
-                      child: SmoothPageIndicator(
-                        controller: controller,
-                        count: 4,
-                        effect: WormEffect(
-                          spacing: 12,
-                          dotColor: Colors.orange,
-                          activeDotColor: Colors.teal.shade100,
+                  ),
+                  Center(
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50),
+                            )),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 30,
                         ),
-                        onDotClicked: (index) => controller.animateToPage(index,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease),
                       ),
                     ),
-                    TextButton(
-                      child:
-                          Text('Next', style: TextStyle(color: Colors.white)),
-                      onPressed: () => controller.nextPage(
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.easeIn,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ]),
+
+                /////yaha bata
+                // height: 80,
+                // color: Colors.pinkAccent,
+                // child: Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                // TextButton(
+                //   child:
+                //       Text('Skip', style: TextStyle(color: Colors.white)),
+                //   onPressed: () => controller.jumpToPage(3),
+                // ),
+                //     Center(
+                //       child: SmoothPageIndicator(
+                //         controller: controller,
+                //         count: 4,
+                //         effect: WormEffect(
+                //           spacing: 12,
+                //           dotColor: Colors.orange,
+                //           activeDotColor: Colors.teal.shade100,
+                //         ),
+                //         onDotClicked: (index) => controller.animateToPage(index,
+                //             duration: const Duration(milliseconds: 300),
+                //             curve: Curves.ease),
+                //       ),
+                //     ),
+                //     TextButton(
+                //       child:
+                //           Text('Next', style: TextStyle(color: Colors.white)),
+                //       onPressed: () => controller.nextPage(
+                //         duration: Duration(milliseconds: 300),
+                //         curve: Curves.easeIn,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ),
       ),
     );
