@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class onboarding extends StatefulWidget {
+class boaRD extends StatefulWidget {
   @override
-  State<onboarding> createState() => _onboardingState();
+  State<boaRD> createState() => _boaRDState();
 }
 
-class _onboardingState extends State<onboarding> {
+class _boaRDState extends State<boaRD> {
   final controller = PageController();
   bool isLastPage = false;
   late double _onBoardValue = 0.25;
@@ -40,10 +40,10 @@ class _onboardingState extends State<onboarding> {
         child: SingleChildScrollView(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image.asset(
+              height: MediaQuery.of(context).size.height * 0.56,
               image,
-              height: MediaQuery.of(context).size.height * 0.55,
               fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width,
+              width: double.infinity,
             ),
             SizedBox(
               height: 20,

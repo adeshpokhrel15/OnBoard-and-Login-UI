@@ -1,3 +1,4 @@
+import 'package:firstday/screens/board.dart';
 import 'package:firstday/screens/onBoardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: onboarding(),
+      home: boaRD(),
     );
   }
 }
